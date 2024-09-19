@@ -55,3 +55,4 @@ def add_ppg_ratio_to_player(sd: SeasonDetails, ppg_ratio: float, year: int):
 
 
 
+print(get_all_season_details(2022))

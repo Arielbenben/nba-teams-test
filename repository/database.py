@@ -57,8 +57,17 @@ def create_table_fantasy_team():
             cursor.execute('''
             CREATE TABLE IF NOT EXISTS fantasy_team (
                 id SERIAL PRIMARY KEY,
-                player_id VARCHAR(100) NOT NULL,
-                FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                name VARCHAR(100) NOT NULL,
+                sg_player_id VARCHAR(100) NOT NULL,
+                pf_player_id VARCHAR(100) NOT NULL,
+                pg_player_id VARCHAR(100) NOT NULL,
+                sf_player_id VARCHAR(100) NOT NULL,
+                c_player_id VARCHAR(100) NOT NULL,
+                FOREIGN KEY (sg_player_id) REFERENCES players(id) ON DELETE CASCADE,
+                FOREIGN KEY (pf_player_id) REFERENCES players(id) ON DELETE CASCADE,
+                FOREIGN KEY (pg_player_id) REFERENCES players(id) ON DELETE CASCADE,
+                FOREIGN KEY (sf_player_id) REFERENCES players(id) ON DELETE CASCADE,
+                FOREIGN KEY (c_player_id) REFERENCES players(id) ON DELETE CASCADE
             )
             ''')
             connection.commit()
