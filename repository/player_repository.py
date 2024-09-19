@@ -30,3 +30,9 @@ def get_player_by_id_db(player_id: str):
             player = Player(id=res['id'], name=res['name'])
             return player
 
+def get_player_name_by_player_id(player_id):
+    with get_db_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM players WHERE id = %s", (player_id,))
+            player_name = cursor.fetchone()['name']
+    return player_name

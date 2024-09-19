@@ -4,7 +4,7 @@ from service.season_service import convert_season_details_from_api_to_model, cre
 
 
 
-def get_data_from_api_and_save_to_db():
+def seed():
     years = [2022, 2023, 2024]
     for year in years:
         data = get_data_of_players_from_api(year)

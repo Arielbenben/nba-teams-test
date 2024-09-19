@@ -1,5 +1,7 @@
 from models.SeasonDetails import SeasonDetails
 from repository.database import get_db_connection
+from utils.average_points_per_season import calculate_average_season_points
+from repository.player_repository import get_player_name_by_player_id
 
 
 
@@ -36,7 +38,20 @@ def get_all_season_details(year: int):
                return
            all_season_details = [SeasonDetails(player_id=p['player_id'], team=p['team'], position=p['position'],
                                                games=p['games'], points=p['points'], two_percent=p['two_percent'],
-                                               three_percent=p['three_percent'], atr=p['atr']) for p in res]
+                                               three_percent=p['three_percent'], atr=p['atr'],
+                                               player_name=get_player_name_by_player_id(p['player_id']), season=p['season']) for p in res]
+           for player in all_season_details:
+               player.ppg_ratio = player.points / calculate_average_season_points(player.season, player.position, all_season_details)
            connection.commit()
            return all_season_details
+
+def add_ppg_ratio_to_player(sd: SeasonDetails, ppg_ratio: float, year: int):
+   with get_db_connection() as connection:
+       with connection.cursor() as cursor:
+           cursor.execute(f" UPDATE season_{year} SET ppg_ratio = %s WHERE player_id = %s", (ppg_ratio, sd.player_id))
+           connection.commit()
+           return
+
+
+
 
