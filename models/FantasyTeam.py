@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-#
-#
-#
-# @dataclass
-# class FantasyTeam:
-#
+
+
+
+@dataclass
+class FantasyTeam:
+    

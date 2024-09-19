@@ -39,9 +39,9 @@ def get_all_season_details(year: int):
            all_season_details = [SeasonDetails(player_id=p['player_id'], team=p['team'], position=p['position'],
                                                games=p['games'], points=p['points'], two_percent=p['two_percent'],
                                                three_percent=p['three_percent'], atr=p['atr'],
-                                               player_name=get_player_name_by_player_id(p['player_id']), season=p['season']) for p in res]
+                                               player_name=get_player_name_by_player_id(p['player_id'])) for p in res]
            for player in all_season_details:
-               player.ppg_ratio = player.points / calculate_average_season_points(player.season, player.position, all_season_details)
+               player.ppg_ratio = player.points / calculate_average_season_points(year, player.position, all_season_details)
            connection.commit()
            return all_season_details
 

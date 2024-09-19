@@ -14,7 +14,7 @@ class SeasonDetails:
     atr : float
     ppg_ratio : float = None
     player_name : str = None
-    season : int = None
+
 
 
 
