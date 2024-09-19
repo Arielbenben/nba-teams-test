@@ -12,20 +12,21 @@ def get_all_players():
            return all_players
 
 
-def create_player_db(player: Player):
+def create_player_to_db(player: Player):
     with get_db_connection() as connection:
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO players (playerName) VALUES (%s) ",
-                           (player.playerName,))
+            cursor.execute("INSERT INTO players (id, name) VALUES (%s, %s) ",
+                           (player.id, player.name,))
             connection.commit()
             return
 
-def get_player_by_id_db(player_id: int):
+def get_player_by_id_db(player_id: str):
     with get_db_connection() as connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM players WHERE ID = %s", (player_id,))
-            res = cursor.fetchall()
-            player = Player(**res)
-            connection.commit()
+            res = cursor.fetchone()
+            if not res:
+                return None
+            player = Player(id=res['id'], name=res['name'])
             return player
 

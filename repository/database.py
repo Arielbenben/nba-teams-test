@@ -21,7 +21,7 @@ def create_table_players():
         with connection.cursor() as cursor:
             cursor.execute('''
             CREATE TABLE IF NOT EXISTS players (
-                id SERIAL PRIMARY KEY,
+                id VARCHAR(100) PRIMARY KEY,
                 name VARCHAR(100) NOT NULL
             )
             ''')
@@ -35,13 +35,15 @@ def create_table_season(year: str):
             cursor.execute(f'''
             CREATE TABLE IF NOT EXISTS season_{year} (
                 id SERIAL PRIMARY KEY,
-                player_id INTEGER NOT NULL,
+                player_id VARCHAR(100) NOT NULL,
                 team VARCHAR(100) NOT NULL,
                 position VARCHAR(100) NOT NULL,
-                games INTEGER NOT NULL,
-                points INTEGER NOT NULL,
+                games INTEGER,
+                points INTEGER ,
                 two_percent FLOAT,
                 three_percent FLOAT,
+                atr FLOAT,
+                ppg_ratio FLOAT,
                 FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
             )
             ''')
@@ -55,9 +57,10 @@ def create_table_fantasy_team():
             cursor.execute('''
             CREATE TABLE IF NOT EXISTS fantasy_team (
                 id SERIAL PRIMARY KEY,
-                player_id INTEGER NOT NULL,
+                player_id VARCHAR(100) NOT NULL,
                 FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
             )
             ''')
             connection.commit()
             return
+

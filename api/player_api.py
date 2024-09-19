@@ -9,9 +9,10 @@ def get_date_from_api(url):
     return response.json()
 
 
-def get_data_of_players_from_api():
-    return get_date_from_api(players_url)
+def get_data_of_players_from_api(year: int):
+    return get_date_from_api(get_url_per_year(year))
 
+def get_url_per_year(year: int):
+    return f"http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataTotals/query?season={year}&&pageSize=1000"
 
-
-# print(get_data_of_players_from_api())
+# print(get_data_of_players_from_api(2024))
