@@ -1,8 +1,7 @@
 from models.SeasonDetails import SeasonDetails
 from repository.database import get_db_connection
 from utils.average_points_per_season import calculate_average_season_points
-from repository.player_repository import get_player_name_by_player_id
-
+from repository.player_repository import get_player_name_by_player_id, get_all_players
 
 
 def create_season_details_db(sd: SeasonDetails, year: int):
@@ -52,7 +51,7 @@ def add_ppg_ratio_to_player(sd: SeasonDetails, ppg_ratio: float, year: int):
            connection.commit()
            return
 
+# print(get_all_season_details(2024))
 
 
 
-print(get_all_season_details(2022))

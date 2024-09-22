@@ -36,3 +36,5 @@ def get_player_name_by_player_id(player_id):
             cursor.execute("SELECT * FROM players WHERE id = %s", (player_id,))
             player_name = cursor.fetchone()['name']
     return player_name
+
+# print(get_all_players())

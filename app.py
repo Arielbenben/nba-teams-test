@@ -8,13 +8,13 @@ from controllers.fantasy_teams_controller import fantasy_team_blueprint
 
 
 
-# app = Flask(__name__)
-#
-# if __name__ == "__main__":
-# #
-# #     create_all_tables()
-# #     seed()
+app = Flask(__name__)
 
-#     app.register_blueprint(players_blueprint, url_prefix="/api/players")
-#       app.register_blueprint(fantasy_team_blueprint, url_prefix="/api/teams")
-#     app.run(debug=True)
+if __name__ == "__main__":
+#
+#     create_all_tables()
+#     seed()
+
+    app.register_blueprint(players_blueprint, url_prefix="/api/players")
+    app.register_blueprint(fantasy_team_blueprint, url_prefix="/api/teams")
+    app.run(debug=True)
